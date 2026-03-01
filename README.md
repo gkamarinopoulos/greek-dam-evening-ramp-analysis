@@ -1,66 +1,107 @@
-# Greek DAM Evening Ramp Analysis (January 2025)
-
-## Research Question
-
-Why are electricity prices often elevated around 20:00 in the Greek Day-Ahead Market (DAM)?
-
-This project analyzes whether price spikes are driven purely by demand levels, or by residual demand ramps caused by declining renewable generation.
+# Hourly Price Dynamics in the Greek Day-Ahead Market  
+## An Exploratory Analysis of Load, Renewables and Residual Demand Ramps (January 2025)
 
 ---
 
-## Data
+## Overview
 
-- Greek Day-Ahead Market results (HEnEx)
-- System Load data (ADMIE)
-- Renewable generation injections (ADMIE)
-- Period: January 2025
+This project explores hourly price dynamics in the Greek Day-Ahead Market (DAM) using January 2025 data (744 hourly observations).
+
+The objective is to understand how electricity prices evolve throughout the day and how they relate to:
+
+- System Load  
+- Renewable energy injections  
+- Net Load (Load − RES)  
+- Residual demand ramps  
+
+The analysis is purely data-driven and focuses on identifying observable patterns in hourly price formation.
+
+---
+
+## Data Sources
+
+- **HEnEx** — Day-Ahead Market results (MCP)
+- **ADMIE** — System Load data
+- **ADMIE** — Renewable generation injections
+
+Period analyzed:
+- January 2025
+- 31 days
 - 744 hourly observations
+
+The final merged dataset includes:
+
+- `MCP`
+- `Load`
+- `RES`
+- `Net Load`
+- `Ramp (Δ Net Load)`
 
 ---
 
 ## Methodology
 
-1. Merge MCP, Load, and RES datasets
-2. Compute Net Load = Load − RES
-3. Compute hourly residual demand ramps
+1. Merge MCP, Load and RES datasets by date and hour.
+2. Compute: Net Load = Load − RES
+3. Compute hourly residual demand ramps: Ramp = Δ(Net Load)
 4. Analyze:
-   - Correlations
-   - Hourly averages
-   - Ramp-price relationship
+- Hourly averages
+- Correlations
+- Ramp–price relationships
+- Visual patterns in evening dynamics
 
 ---
 
-## Key Findings
+## Key Visualizations
 
-- MCP correlates with Load (0.63)
-- MCP correlates with Net Load (0.60)
-- Peak prices occur at 17:00, before peak load (19:00)
-- Strong positive relationship between price and positive residual load ramps
+### 1️⃣ Average MCP by Hour
 
-This suggests that Greek DAM prices are not purely demand-driven.
-Evening solar decline creates ramp stress, triggering marginal fuel switching and price spikes.
+![MCP](figures/01_mcp_by_hour.png)
+
+Observation:
+Hourly prices exhibit clear intraday structure, with elevated levels during evening hours.
 
 ---
 
-## Conclusion
+### 2️⃣ Load vs Net Load
 
-Electricity price spikes in January 2025 are partially driven by sunset ramp effects rather than absolute demand levels.
+![Load](figures/02_load_vs_netload.png)
 
-Energy markets respond to system stress — not just demand peaks.
+Observation:
+While total load increases into the evening, net load dynamics differ significantly due to renewable generation patterns.
+
+---
+
+### 3️⃣ Average Net Load Ramp by Hour
+
+![Ramp](figures/03_ramp_by_hour.png)
+
+Observation:
+Residual demand ramps increase sharply in the late afternoon and early evening, coinciding with declining solar output.
+
+---
+
+### 4️⃣ MCP vs Net Load Ramp
+
+![Scatter](figures/04_mcp_vs_ramp.png)
+
+Observation:
+Positive net-load ramps show a meaningful relationship with price levels, suggesting that price formation is influenced not only by demand levels but also by system transitions.
+
+---
+
+## Main Findings
+
+- MCP correlates with Load (~0.63)
+- MCP correlates with Net Load (~0.60)
+- Peak prices occur before peak load
+- Positive residual demand ramps show moderate correlation with price (~0.40)
+
+These observations suggest that hourly price formation in the Greek DAM is influenced not only by absolute demand levels but also by dynamic system conditions and ramp effects.
+
+Electricity markets respond to system stress — not just peak demand.
 
 ---
 
 ## Repository Structure
 
-- `data/` → processed dataset
-- `figures/` → visualizations
-- `notebooks/` → full analysis
-- `requirements.txt` → dependencies
-
----
-
-## Author
-
-Ioannis Kamarinopoulos  
-NTUA – Electrical & Computer Engineering  
-Energy Markets & Power Systems
