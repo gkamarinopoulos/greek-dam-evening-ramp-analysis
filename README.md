@@ -105,3 +105,35 @@ Electricity markets respond to system stress — not just peak demand.
 
 ## Repository Structure
 
+data/
+final_merged_jan2025.csv
+
+figures/
+01_mcp_by_hour.png
+02_load_vs_netload.png
+03_ramp_by_hour.png
+04_mcp_vs_ramp.png
+
+notebooks/
+analysis.ipynb
+
+requirements.txt
+
+
+---
+
+## Reproducibility
+
+Install dependencies:
+pip install -r requirements.txt
+
+Run:
+notebooks/analysis.ipynb
+
+---
+
+## Author
+
+Ioannis Kamarinopoulos  
+Electrical & Computer Engineering — NTUA  
+Interest areas: Energy Markets, Power Systems, Market Design, System Dynamics
